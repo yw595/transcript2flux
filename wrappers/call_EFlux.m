@@ -18,10 +18,10 @@ function fluxes = call_EFlux(model, gene_names, gene_exp, scale_rxn, scale_value
     levels = gene_to_reaction_levels(model, gene_names, gene_exp, @min, @(x,y)(x+y));
     levels = levels / max(levels);
     levels(isnan(levels)) = 1;
-    
+
     blocked_lb = model.lb >= 0;
     blocked_ub = model.ub <= 0;
-
+    
     model.lb = -levels;
     model.lb(blocked_lb) = 0;
     model.ub = levels;

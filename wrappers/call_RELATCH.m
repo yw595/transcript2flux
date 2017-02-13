@@ -28,7 +28,7 @@ function fluxes = call_RELATCH(model, gene_names, gene_exp, external_rxns, exter
     external_flux.val = external_rates;
     external_flux.err = zeros(size(external_flux.val));
     
-    
+    relatch_gene_data
     solutionRef = RELATCH_Reference(model, relatch_gene_data, external_flux);
     
     if solutionRef.stat == 1
@@ -111,9 +111,23 @@ nRxnsGPRrev=size(GPRrev_ID,1);
 
 % Generate GPR matrix
 GPR=regexp(model.rules(GPR_ID),'\|','split');
+GPR{1}
+GPR{2}
+GPR{1:20}
 GPR=cellfun(@(c) regexp(c(:),'x\((\d+)\)','tokens'), GPR, 'UniformOutput', 0);
+GPR{1}{1}{1}
+a=vertcat(GPR{1:10});
+for i=1:10
+    a{i}{1}
+end
+b = a{1};
+str2double([b{:}])
 Enz=cellfun(@(c) str2double([c{:}]), vertcat(GPR{:}), 'UniformOutput',0);
+GPR{13}
+Enz{1}
+
 nEnzs=size(Enz,1);
+nEnzs
 nGenes=size(model.genes,1);
 
 numEnz=zeros(nRxnsGPR,1);
@@ -123,6 +137,13 @@ for i=1:nRxnsGPR; Rxn2Enz(i,sum(numEnz(1:i-1))+1:sum(numEnz(1:i)))=ones(1,numEnz
 numSub=zeros(nEnzs,1);
 for i=1:nEnzs; numSub(i)=numel(Enz{i}); end;
 Enz2Gene=sparse(nEnzs,nGenes);
+%Enz2Gene
+for i=1:20%nEnzs
+    i
+    Enz{i}
+    %Enz2Gene(i,Enz
+end
+%Enz
 for i=1:nEnzs; Enz2Gene(i,Enz{i})=1; end;
 
 % Setting up the problem
